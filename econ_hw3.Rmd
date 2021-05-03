@@ -1,12 +1,14 @@
 ---
 title: "Homework 3"
-author: "Kristin Gill"
+author: "Elmera Azadpour, Genevieve Chiong, and Kristin Gill"
 date: "5/3/2021"
-output: html_document
+output: 
+   html_document:
+     code_folding: hide
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 library(tidyverse)
 library(janitor)
 library(here)
@@ -14,6 +16,70 @@ library(here)
 
 ```{r}
 # read in the data
-gas_tax_data <- read_csv(here("data", "HW3_data.csv"))
+gas_tax_data <- read_csv(here("data", "HW3_data.csv")) %>% 
+  clean_names()
+```
+
+Result: P = 12 - 6.6x10^-5Q
+```{r}
+# linear regression low income
+ggplot(data = gas_tax_data, aes(x = q_low_gallons,
+                                y = price_dollars)) +
+  geom_line() +
+  labs(x = "Quantity (gallons)",
+       y = "Price (dollars)") +
+  theme_minimal() +
+  geom_smooth(method = "lm",
+              color = "black",
+              size = 0.5,
+              fill = "gray10",
+              alpha = 0.5) +
+  ggpubr::stat_regline_equation(label.x = 12000, label.y = 5) +
+  ggpubr::stat_cor(label.x = 60000, label.y = 10)
+```
+
+Result: P = 16 - 2.7x10^-5Q
+```{r}
+# linear regression high income
+ggplot(data = gas_tax_data, aes(x = q_high_gallons,
+                                y = price_dollars)) +
+  geom_line() +
+  labs(x = "Quantity (gallons)",
+       y = "Price (dollars)") +
+  theme_minimal() +
+  geom_smooth(method = "lm",
+              color = "black",
+              size = 0.5,
+              fill = "gray10",
+              alpha = 0.5) +
+  ggpubr::stat_regline_equation(label.x = 190000, label.y = 5) +
+  ggpubr::stat_cor(label.x = 300000, label.y = 10)
+```
+
+```{r}
+# creating data frames for the linear regression
+low_df <- data.frame(price = seq.int(from = 0, to = 16)) %>% 
+  mutate(quantity = (12 - price)/(6.6e-5))
+
+high_df <- data.frame(price = seq.int(from = 0, to = 16)) %>% 
+  mutate(quantity = (16 - price)/(2.7e-5))
+```
+
+```{r}
+# graphing the two demand curves together
+ggplot() +
+  geom_line(data = low_df, aes(x = quantity,
+                               y = price,
+                               color = "red")) +
+  geom_line(data = high_df, aes(x = quantity,
+                                y = price,
+                                color = "blue")) +
+  labs(x = "Quantity (gallons)",
+       y = "Price (dollars)",
+       color = "Income Group",
+       title = "Marginal Benefit of Gas Use by Income Group") +
+  theme_minimal() +
+  scale_x_continuous(limit = c(0,600000)) +
+  scale_color_manual(labels = c("High Income", "Low Income"), values = c("blue", "red"))
 ```
 
