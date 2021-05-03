@@ -85,8 +85,11 @@ ggplot() +
 
 ```{r}
 # creating a supply data frame
-supply_df <- data.frame(quantity= seq.int(from = 0, to = 600000)) %>% 
+supply_df <- data.frame(quantity = seq.int(from = 0, to = 600000)) %>% 
   mutate(price = 3*quantity)
+
+aggregate_df <- data.frame(price = seq.int(from = 0, to = 20)) %>% 
+  mutate(quantity = (35.38 - price)/(4.57e-5))
 
 ggplot() +
   geom_line(data = low_df, aes(x = quantity,
@@ -97,6 +100,8 @@ ggplot() +
                                 color = "blue")) +
   geom_line(data = supply_df, aes(x = quantity,
                                   y = price)) +
+  geom_line(data = aggregate_df, aes(x = quantity,
+                                     y = price)) +
   labs(x = "Quantity (gallons of gas)",
        y = "Price ($/gallon)",
        color = "Income Group",
