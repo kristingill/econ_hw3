@@ -1,0 +1,19 @@
+---
+title: "Homework 3"
+author: "Kristin Gill"
+date: "5/3/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(janitor)
+library(here)
+```
+
+```{r}
+# read in the data
+gas_tax_data <- read_csv(here("data", "HW3_data.csv"))
+```
+
