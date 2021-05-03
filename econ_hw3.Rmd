@@ -26,8 +26,8 @@ Result: P = 12 - 6.6x10^-5Q
 ggplot(data = gas_tax_data, aes(x = q_low_gallons,
                                 y = price_dollars)) +
   geom_line() +
-  labs(x = "Quantity (gallons)",
-       y = "Price (dollars)") +
+  labs(x = "Quantity (gallons of gas)",
+       y = "Price ($/gallon)") +
   theme_minimal() +
   geom_smooth(method = "lm",
               color = "black",
@@ -44,8 +44,8 @@ Result: P = 16 - 2.7x10^-5Q
 ggplot(data = gas_tax_data, aes(x = q_high_gallons,
                                 y = price_dollars)) +
   geom_line() +
-  labs(x = "Quantity (gallons)",
-       y = "Price (dollars)") +
+  labs(x = "Quantity (gallons of gas)",
+       y = "Price ($/gallon)") +
   theme_minimal() +
   geom_smooth(method = "lm",
               color = "black",
@@ -74,8 +74,8 @@ ggplot() +
   geom_line(data = high_df, aes(x = quantity,
                                 y = price,
                                 color = "blue")) +
-  labs(x = "Quantity (gallons)",
-       y = "Price (dollars)",
+  labs(x = "Quantity (gallons of gas)",
+       y = "Price ($/gallon)",
        color = "Income Group",
        title = "Marginal Benefit of Gas Use by Income Group") +
   theme_minimal() +
@@ -97,8 +97,8 @@ ggplot() +
                                 color = "blue")) +
   geom_line(data = supply_df, aes(x = quantity,
                                   y = price)) +
-  labs(x = "Quantity (gallons)",
-       y = "Price (dollars)",
+  labs(x = "Quantity (gallons of gas)",
+       y = "Price ($/gallon)",
        color = "Income Group",
        title = "Marginal Benefit of Gas Use by Income Group") +
   theme_minimal() +
