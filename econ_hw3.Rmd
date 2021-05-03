@@ -83,3 +83,27 @@ ggplot() +
   scale_color_manual(labels = c("High Income", "Low Income"), values = c("blue", "red"))
 ```
 
+```{r}
+# creating a supply data frame
+supply_df <- data.frame(quantity = seq.int(from = 0, to = 600000)) %>% 
+  mutate(price = 3*quantity)
+
+ggplot() +
+  geom_line(data = low_df, aes(x = quantity,
+                               y = price,
+                               color = "red")) +
+  geom_line(data = high_df, aes(x = quantity,
+                                y = price,
+                                color = "blue")) +
+  geom_line(data = supply_df, aes(x = quantity,
+                                  y = price)) +
+  labs(x = "Quantity (gallons)",
+       y = "Price (dollars)",
+       color = "Income Group",
+       title = "Marginal Benefit of Gas Use by Income Group") +
+  theme_minimal() +
+  scale_x_continuous(limit = c(0,600000)) +
+  scale_y_continuous(limit = c(0,20)) +
+  scale_color_manual(labels = c("High Income", "Low Income"), values = c("blue", "red"))
+```
+
