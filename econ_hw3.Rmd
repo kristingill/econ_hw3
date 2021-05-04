@@ -112,3 +112,22 @@ ggplot() +
   scale_color_manual(labels = c("High Income", "Low Income"), values = c("blue", "red"))
 ```
 
+```{r}
+# creating a function for #5
+mec <- function() {
+  for(i in 51:150) {
+    print(7.9e-5*i)
+  }
+}
+mec()
+```
+
+```{r}
+# actually creating df
+numb5_df <- data.frame(scc = seq.int(from = 51, to = 150)) %>% 
+  mutate(mec = 0.00889*scc) %>% 
+  mutate(quantity = (35.88 - mec)/0.00004993) %>% 
+  mutate(price = (4.23e-6)*quantity + 0.45) %>% 
+  mutate(hcs = .5*(16-price)*((16-price)/2.7e-5))
+```
+
