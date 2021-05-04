@@ -126,8 +126,15 @@ mec()
 # actually creating df
 numb5_df <- data.frame(scc = seq.int(from = 51, to = 150)) %>% 
   mutate(mec = 0.00889*scc) %>% 
-  mutate(quantity = (35.88 - mec)/0.00004993) %>% 
+  mutate(quantity = (35.38 - mec)/0.00004993) %>% 
   mutate(price = (4.23e-6)*quantity + 0.45) %>% 
-  mutate(hcs = .5*(16-price)*((16-price)/2.7e-5))
+  mutate(hcs = .5*(16-price)*((16-price)/2.7e-5)) %>% 
+  mutate(lcs = .5*(12-price)*((12-price)/6.6e-5)) %>% 
+  mutate(ps = .5*(price-0.45)*quantity) %>% 
+  mutate(percent_hcs = hcs/(hcs + lcs)) %>% 
+  mutate(percent_lcs = lcs/(hcs + lcs)) %>% 
+  mutate(tax_rev = quantity*0.45) %>% 
+  mutate(welfare_hcs = hcs + (percent_hcs*tax_rev)) %>% 
+  mutate(welfare_lcs = lcs + (percent_lcs*tax_rev))
 ```
 
