@@ -1,5 +1,5 @@
 ---
-title: "Homework 3"
+title: "ESM 204 Homework 3"
 author: "Elmera Azadpour, Genevieve Chiong, and Kristin Gill"
 date: "5/3/2021"
 output: 
@@ -27,10 +27,10 @@ Result: P = 12 - 6.6x10^-5Q
 ggplot(data = gas_tax_data, aes(x = q_low_gallons,
                                 y = price_dollars)) +
   geom_line() +
-  labs(x = "Quantity (gallons of gas)",
-       y = "Price ($/gallon)") +
+  labs(x = "\nQuantity (gallons of gas)",
+       y = "Price ($/gallon)\n") +
   theme_minimal() +
-  geom_smooth(method = "lm",
+    geom_smooth(method = "lm",
               color = "black",
               size = 0.5,
               fill = "gray10",
@@ -45,8 +45,8 @@ Result: P = 16 - 2.7x10^-5Q
 ggplot(data = gas_tax_data, aes(x = q_high_gallons,
                                 y = price_dollars)) +
   geom_line() +
-  labs(x = "Quantity (gallons of gas)",
-       y = "Price ($/gallon)") +
+  labs(x = "\nQuantity (gallons of gas)",
+       y = "Price ($/gallon)\n") +
   theme_minimal() +
   geom_smooth(method = "lm",
               color = "black",
@@ -75,8 +75,8 @@ ggplot() +
   geom_line(data = high_df, aes(x = quantity,
                                 y = price,
                                 color = "blue")) +
-  labs(x = "Quantity (gallons of gas)",
-       y = "Price ($/gallon)",
+  labs(x = "\nQuantity (gallons of gas)",
+       y = "Price ($/gallon)\n",
        color = "Income Group",
        title = "Marginal Benefit of Gas Use by Income Group") +
   theme_minimal() +
@@ -97,8 +97,8 @@ ggplot() +
                                 color = "blue")) +
   geom_line(data = aggregate_df, aes(x = quantity,
                                      y = price)) +
-  labs(x = "Quantity (gallons of gas)",
-       y = "Price ($/gallon)",
+  labs(x = "\nQuantity (gallons of gas)",
+       y = "Price ($/gallon)\n",
        color = "Income Group",
        title = "Marginal Benefit of Gas Use by Income Group") +
   theme_minimal() +
@@ -138,4 +138,5 @@ kbl(numb5_df, caption = "**Table 1:**") %>%
    kable_styling(latex_options = c("striped", "hold_position"),
                 full_width = F)
 ```
+
 
