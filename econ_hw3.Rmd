@@ -119,22 +119,35 @@ mec <- function() {
 ```{r}
 # actually creating df
 numb5_df <- data.frame(scc = seq.int(from = 51, to = 150)) %>% 
-  mutate(mec = 0.00889*scc) %>% 
-  mutate(quantity = (14.84 - mec)/0.00002406) %>% 
-  mutate(price = (14.84 - ((1.92e-5)*quantity))) %>% 
-  mutate(hcs = .5*(16-price)*((16-price)/2.7e-5)) %>% 
-  mutate(lcs = .5*(12-price)*((12-price)/6.6e-5)) %>% 
-  mutate(ps = .5*(price-mec)*quantity) %>% 
+  mutate(MEC = 0.00889*scc) %>% 
+  mutate(Quantity = (14.84 - MEC)/0.00002406) %>% 
+  mutate(Price = (14.84 - ((1.92e-5)*Quantity))) %>% 
+  mutate(hcs = .5*(16-Price)*((16-Price)/2.7e-5)) %>% 
+  mutate(lcs = .5*(12-Price)*((12-Price)/6.6e-5)) %>% 
+  mutate(ps = .5*(Price-MEC)*Quantity) %>% 
   mutate(percent_hcs = hcs/(hcs + lcs)) %>% 
   mutate(percent_lcs = lcs/(hcs + lcs)) %>% 
-  mutate(tax_rev = quantity*mec) %>% 
+  mutate(tax_rev = Quantity*MEC) %>% 
   mutate(welfare_hcs = hcs + (percent_hcs*tax_rev)) %>% 
   mutate(welfare_lcs = lcs + (percent_lcs*tax_rev))
 ```
 
 ```{r}
 # result table
-kbl(numb5_df, caption = "**Table 1:**") %>% 
+numb5_results <- numb5_df %>% 
+  filter(scc %in% c("51", "60", "70", "80", "90", "100", "110", "120", "130", "140", "150")) %>% 
+  rename("Producer Surplus" = "ps") %>% 
+  rename("Social Cost of Carbon" = "scc") %>% 
+  rename("High Income Consumer Surplus (HCS)" = "hcs") %>% 
+  rename("Low Income Consumer Surplus (LCS)" = "lcs") %>% 
+  rename("Percent HCS" = "percent_hcs") %>% 
+  rename("Percent LCS" = "percent_lcs") %>% 
+  rename("Tax Revenue" = "tax_rev") %>% 
+  rename("Welfare HCS" = "welfare_hcs") %>% 
+  rename("Welfare LCS" = "welfare_lcs") %>% 
+  rename("Quantity(gallons)" = "Quantity")
+  
+kbl(numb5_results, caption = "Table 1: Results for different estimates of the social cost of carbon. All values, aside from percents and gallons, are in dollars.") %>% 
    kable_styling(latex_options = c("striped", "hold_position"),
                 full_width = F)
 ```
