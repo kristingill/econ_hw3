@@ -12,6 +12,7 @@ knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 library(tidyverse)
 library(janitor)
 library(here)
+library(kableExtra)
 ```
 
 ```{r}
@@ -136,5 +137,12 @@ numb5_df <- data.frame(scc = seq.int(from = 51, to = 150)) %>%
   mutate(tax_rev = quantity*0.45) %>% 
   mutate(welfare_hcs = hcs + (percent_hcs*tax_rev)) %>% 
   mutate(welfare_lcs = lcs + (percent_lcs*tax_rev))
+```
+
+```{r}
+# result table
+kbl(numb5_df, caption = "**Table 1:**") %>% 
+   kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F)
 ```
 
