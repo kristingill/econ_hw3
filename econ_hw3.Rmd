@@ -13,6 +13,8 @@ library(tidyverse)
 library(janitor)
 library(here)
 library(kableExtra)
+library(formattable)
+library(priceR)
 ```
 
 ```{r}
@@ -129,23 +131,25 @@ numb5_df <- data.frame(scc = seq.int(from = 51, to = 150)) %>%
   mutate(percent_lcs = lcs/(hcs + lcs)) %>% 
   mutate(tax_rev = Quantity*MEC) %>% 
   mutate(welfare_hcs = hcs + (percent_hcs*tax_rev)) %>% 
-  mutate(welfare_lcs = lcs + (percent_lcs*tax_rev))
+  mutate(welfare_lcs = lcs + (percent_lcs*tax_rev)-tax_rev) %>% 
+  rename("High Income Consumer Surplus (HCS)" = "hcs") %>% 
+  rename("Low Income Consumer Surplus (LCS)" = "lcs") %>% 
+  rename("Percent HCS" = "percent_hcs") %>% 
+  rename("Percent LCS" = "percent_lcs") %>% 
+  rename("Tax Revenue" = "tax_rev") %>% 
+  rename("Quantity(gallons)" = "Quantity")
 ```
 
 ```{r}
 # result table
 numb5_results <- numb5_df %>% 
   filter(scc %in% c("51", "60", "70", "80", "90", "100", "110", "120", "130", "140", "150")) %>% 
+  select(scc, MEC, welfare_hcs, welfare_lcs, ps) %>% 
   rename("Producer Surplus" = "ps") %>% 
   rename("Social Cost of Carbon" = "scc") %>% 
-  rename("High Income Consumer Surplus (HCS)" = "hcs") %>% 
-  rename("Low Income Consumer Surplus (LCS)" = "lcs") %>% 
-  rename("Percent HCS" = "percent_hcs") %>% 
-  rename("Percent LCS" = "percent_lcs") %>% 
-  rename("Tax Revenue" = "tax_rev") %>% 
   rename("Welfare HCS" = "welfare_hcs") %>% 
   rename("Welfare LCS" = "welfare_lcs") %>% 
-  rename("Quantity(gallons)" = "Quantity")
+  rename("Marginal External Cost" = "MEC")
   
 kbl(numb5_results, caption = "Table 1: Results for different estimates of the social cost of carbon. All values, aside from percents and gallons, are in dollars.") %>% 
    kable_styling(latex_options = c("striped", "hold_position"),

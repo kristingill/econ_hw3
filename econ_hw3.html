@@ -281,20 +281,22 @@ numb5_df &lt;- data.frame(scc = seq.int(from = 51, to = 150)) %&gt;%
   mutate(percent_lcs = lcs/(hcs + lcs)) %&gt;% 
   mutate(tax_rev = Quantity*MEC) %&gt;% 
   mutate(welfare_hcs = hcs + (percent_hcs*tax_rev)) %&gt;% 
-  mutate(welfare_lcs = lcs + (percent_lcs*tax_rev))</code></pre>
-<pre class="r"><code># result table
-numb5_results &lt;- numb5_df %&gt;% 
-  filter(scc %in% c(&quot;51&quot;, &quot;60&quot;, &quot;70&quot;, &quot;80&quot;, &quot;90&quot;, &quot;100&quot;, &quot;110&quot;, &quot;120&quot;, &quot;130&quot;, &quot;140&quot;, &quot;150&quot;)) %&gt;% 
-  rename(&quot;Producer Surplus&quot; = &quot;ps&quot;) %&gt;% 
-  rename(&quot;Social Cost of Carbon&quot; = &quot;scc&quot;) %&gt;% 
+  mutate(welfare_lcs = lcs + (percent_lcs*tax_rev)-tax_rev) %&gt;% 
   rename(&quot;High Income Consumer Surplus (HCS)&quot; = &quot;hcs&quot;) %&gt;% 
   rename(&quot;Low Income Consumer Surplus (LCS)&quot; = &quot;lcs&quot;) %&gt;% 
   rename(&quot;Percent HCS&quot; = &quot;percent_hcs&quot;) %&gt;% 
   rename(&quot;Percent LCS&quot; = &quot;percent_lcs&quot;) %&gt;% 
   rename(&quot;Tax Revenue&quot; = &quot;tax_rev&quot;) %&gt;% 
+  rename(&quot;Quantity(gallons)&quot; = &quot;Quantity&quot;)</code></pre>
+<pre class="r"><code># result table
+numb5_results &lt;- numb5_df %&gt;% 
+  filter(scc %in% c(&quot;51&quot;, &quot;60&quot;, &quot;70&quot;, &quot;80&quot;, &quot;90&quot;, &quot;100&quot;, &quot;110&quot;, &quot;120&quot;, &quot;130&quot;, &quot;140&quot;, &quot;150&quot;)) %&gt;% 
+  select(scc, MEC, welfare_hcs, welfare_lcs, ps) %&gt;% 
+  rename(&quot;Producer Surplus&quot; = &quot;ps&quot;) %&gt;% 
+  rename(&quot;Social Cost of Carbon&quot; = &quot;scc&quot;) %&gt;% 
   rename(&quot;Welfare HCS&quot; = &quot;welfare_hcs&quot;) %&gt;% 
   rename(&quot;Welfare LCS&quot; = &quot;welfare_lcs&quot;) %&gt;% 
-  rename(&quot;Quantity(gallons)&quot; = &quot;Quantity&quot;)
+  rename(&quot;Marginal External Cost&quot; = &quot;MEC&quot;)
   
 kbl(numb5_results, caption = &quot;Table 1: Results for different estimates of the social cost of carbon. All values, aside from percents and gallons, are in dollars.&quot;) %&gt;% 
    kable_styling(latex_options = c(&quot;striped&quot;, &quot;hold_position&quot;),
@@ -309,37 +311,16 @@ Table 1: Results for different estimates of the social cost of carbon. All value
 Social Cost of Carbon
 </th>
 <th style="text-align:right;">
-MEC
-</th>
-<th style="text-align:right;">
-Quantity(gallons)
-</th>
-<th style="text-align:right;">
-Price
-</th>
-<th style="text-align:right;">
-High Income Consumer Surplus (HCS)
-</th>
-<th style="text-align:right;">
-Low Income Consumer Surplus (LCS)
-</th>
-<th style="text-align:right;">
-Producer Surplus
-</th>
-<th style="text-align:right;">
-Percent HCS
-</th>
-<th style="text-align:right;">
-Percent LCS
-</th>
-<th style="text-align:right;">
-Tax Revenue
+Marginal External Cost
 </th>
 <th style="text-align:right;">
 Welfare HCS
 </th>
 <th style="text-align:right;">
 Welfare LCS
+</th>
+<th style="text-align:right;">
+Producer Surplus
 </th>
 </tr>
 </thead>
@@ -352,34 +333,13 @@ Welfare LCS
 0.45339
 </td>
 <td style="text-align:right;">
-597947.2
-</td>
-<td style="text-align:right;">
-3.359414
-</td>
-<td style="text-align:right;">
-2958971
-</td>
-<td style="text-align:right;">
-565604.1
-</td>
-<td style="text-align:right;">
-868824.3
-</td>
-<td style="text-align:right;">
-0.8395256
-</td>
-<td style="text-align:right;">
-0.1604744
-</td>
-<td style="text-align:right;">
-271103.3
-</td>
-<td style="text-align:right;">
 3186569
 </td>
 <td style="text-align:right;">
-609109.2
+338005.91
+</td>
+<td style="text-align:right;">
+868824.3
 </td>
 </tr>
 <tr>
@@ -390,34 +350,13 @@ Welfare LCS
 0.53340
 </td>
 <td style="text-align:right;">
-594621.8
-</td>
-<td style="text-align:right;">
-3.423262
-</td>
-<td style="text-align:right;">
-2929154
-</td>
-<td style="text-align:right;">
-557276.0
-</td>
-<td style="text-align:right;">
-859187.4
-</td>
-<td style="text-align:right;">
-0.8401586
-</td>
-<td style="text-align:right;">
-0.1598414
-</td>
-<td style="text-align:right;">
-317171.3
-</td>
-<td style="text-align:right;">
 3195629
 </td>
 <td style="text-align:right;">
-607973.1
+290801.89
+</td>
+<td style="text-align:right;">
+859187.4
 </td>
 </tr>
 <tr>
@@ -428,34 +367,13 @@ Welfare LCS
 0.62230
 </td>
 <td style="text-align:right;">
-590926.8
-</td>
-<td style="text-align:right;">
-3.494204
-</td>
-<td style="text-align:right;">
-2896202
-</td>
-<td style="text-align:right;">
-548095.1
-</td>
-<td style="text-align:right;">
-848542.7
-</td>
-<td style="text-align:right;">
-0.8408688
-</td>
-<td style="text-align:right;">
-0.1591312
-</td>
-<td style="text-align:right;">
-367733.8
-</td>
-<td style="text-align:right;">
 3205418
 </td>
 <td style="text-align:right;">
-606613.0
+238879.27
+</td>
+<td style="text-align:right;">
+848542.7
 </td>
 </tr>
 <tr>
@@ -466,34 +384,13 @@ Welfare LCS
 0.71120
 </td>
 <td style="text-align:right;">
-587231.9
-</td>
-<td style="text-align:right;">
-3.565147
-</td>
-<td style="text-align:right;">
-2863436
-</td>
-<td style="text-align:right;">
-538990.5
-</td>
-<td style="text-align:right;">
-837964.4
-</td>
-<td style="text-align:right;">
-0.8415865
-</td>
-<td style="text-align:right;">
-0.1584135
-</td>
-<td style="text-align:right;">
-417639.3
-</td>
-<td style="text-align:right;">
 3214916
 </td>
 <td style="text-align:right;">
-605150.2
+187510.86
+</td>
+<td style="text-align:right;">
+837964.4
 </td>
 </tr>
 <tr>
@@ -504,34 +401,13 @@ Welfare LCS
 0.80010
 </td>
 <td style="text-align:right;">
-583537.0
-</td>
-<td style="text-align:right;">
-3.636090
-</td>
-<td style="text-align:right;">
-2830857
-</td>
-<td style="text-align:right;">
-529962.1
-</td>
-<td style="text-align:right;">
-827452.5
-</td>
-<td style="text-align:right;">
-0.8423116
-</td>
-<td style="text-align:right;">
-0.1576884
-</td>
-<td style="text-align:right;">
-466887.9
-</td>
-<td style="text-align:right;">
 3224122
 </td>
 <td style="text-align:right;">
-603584.9
+136696.93
+</td>
+<td style="text-align:right;">
+827452.5
 </td>
 </tr>
 <tr>
@@ -542,34 +418,13 @@ Welfare LCS
 0.88900
 </td>
 <td style="text-align:right;">
-579842.1
-</td>
-<td style="text-align:right;">
-3.707032
-</td>
-<td style="text-align:right;">
-2798464
-</td>
-<td style="text-align:right;">
-521009.9
-</td>
-<td style="text-align:right;">
-817006.9
-</td>
-<td style="text-align:right;">
-0.8430444
-</td>
-<td style="text-align:right;">
-0.1569556
-</td>
-<td style="text-align:right;">
-515479.6
-</td>
-<td style="text-align:right;">
 3233036
 </td>
 <td style="text-align:right;">
-601917.3
+86437.74
+</td>
+<td style="text-align:right;">
+817006.9
 </td>
 </tr>
 <tr>
@@ -580,34 +435,13 @@ Welfare LCS
 0.97790
 </td>
 <td style="text-align:right;">
-576147.1
-</td>
-<td style="text-align:right;">
-3.777975
-</td>
-<td style="text-align:right;">
-2766257
-</td>
-<td style="text-align:right;">
-512134.0
-</td>
-<td style="text-align:right;">
-806627.6
-</td>
-<td style="text-align:right;">
-0.8437850
-</td>
-<td style="text-align:right;">
-0.1562150
-</td>
-<td style="text-align:right;">
-563414.3
-</td>
-<td style="text-align:right;">
 3241658
 </td>
 <td style="text-align:right;">
-600147.8
+36733.55
+</td>
+<td style="text-align:right;">
+806627.6
 </td>
 </tr>
 <tr>
@@ -618,34 +452,13 @@ Welfare LCS
 1.06680
 </td>
 <td style="text-align:right;">
-572452.2
-</td>
-<td style="text-align:right;">
-3.848918
-</td>
-<td style="text-align:right;">
-2734237
-</td>
-<td style="text-align:right;">
-503334.4
-</td>
-<td style="text-align:right;">
-796314.7
-</td>
-<td style="text-align:right;">
-0.8445333
-</td>
-<td style="text-align:right;">
-0.1554667
-</td>
-<td style="text-align:right;">
-610692.0
-</td>
-<td style="text-align:right;">
 3249987
 </td>
 <td style="text-align:right;">
-598276.7
+-12415.35
+</td>
+<td style="text-align:right;">
+796314.7
 </td>
 </tr>
 <tr>
@@ -656,34 +469,13 @@ Welfare LCS
 1.15570
 </td>
 <td style="text-align:right;">
-568757.3
-</td>
-<td style="text-align:right;">
-3.919860
-</td>
-<td style="text-align:right;">
-2702403
-</td>
-<td style="text-align:right;">
-494611.0
-</td>
-<td style="text-align:right;">
-786068.2
-</td>
-<td style="text-align:right;">
-0.8452897
-</td>
-<td style="text-align:right;">
-0.1547103
-</td>
-<td style="text-align:right;">
-657312.8
-</td>
-<td style="text-align:right;">
 3258023
 </td>
 <td style="text-align:right;">
-596304.1
+-61008.69
+</td>
+<td style="text-align:right;">
+786068.2
 </td>
 </tr>
 <tr>
@@ -694,34 +486,13 @@ Welfare LCS
 1.24460
 </td>
 <td style="text-align:right;">
-565062.3
-</td>
-<td style="text-align:right;">
-3.990803
-</td>
-<td style="text-align:right;">
-2670756
-</td>
-<td style="text-align:right;">
-485963.9
-</td>
-<td style="text-align:right;">
-775888.0
-</td>
-<td style="text-align:right;">
-0.8460541
-</td>
-<td style="text-align:right;">
-0.1539459
-</td>
-<td style="text-align:right;">
-703276.6
-</td>
-<td style="text-align:right;">
 3265766
 </td>
 <td style="text-align:right;">
-594230.4
+-109046.16
+</td>
+<td style="text-align:right;">
+775888.0
 </td>
 </tr>
 <tr>
@@ -732,34 +503,13 @@ Welfare LCS
 1.33350
 </td>
 <td style="text-align:right;">
-561367.4
-</td>
-<td style="text-align:right;">
-4.061746
-</td>
-<td style="text-align:right;">
-2639295
-</td>
-<td style="text-align:right;">
-477393.0
-</td>
-<td style="text-align:right;">
-765774.1
-</td>
-<td style="text-align:right;">
-0.8468268
-</td>
-<td style="text-align:right;">
-0.1531732
-</td>
-<td style="text-align:right;">
-748583.4
-</td>
-<td style="text-align:right;">
 3273215
 </td>
 <td style="text-align:right;">
-592056.0
+-156527.48
+</td>
+<td style="text-align:right;">
+765774.1
 </td>
 </tr>
 </tbody>
