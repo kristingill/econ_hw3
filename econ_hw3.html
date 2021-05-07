@@ -290,7 +290,7 @@ numb5_df &lt;- data.frame(scc = seq.int(from = 51, to = 150)) %&gt;%
   rename(&quot;Quantity(gallons)&quot; = &quot;Quantity&quot;)</code></pre>
 <pre class="r"><code># result table
 numb5_results &lt;- numb5_df %&gt;% 
-  filter(scc %in% c(&quot;51&quot;, &quot;60&quot;, &quot;70&quot;, &quot;80&quot;, &quot;90&quot;, &quot;100&quot;, &quot;110&quot;, &quot;120&quot;, &quot;130&quot;, &quot;140&quot;, &quot;150&quot;)) %&gt;% 
+  filter(scc %in% c(&quot;51&quot;, &quot;75&quot;, &quot;100&quot;, &quot;125&quot;, &quot;150&quot;)) %&gt;% 
   select(scc, MEC, welfare_hcs, welfare_lcs, ps) %&gt;% 
   rename(&quot;Producer Surplus&quot; = &quot;ps&quot;) %&gt;% 
   rename(&quot;Social Cost of Carbon&quot; = &quot;scc&quot;) %&gt;% 
@@ -298,12 +298,12 @@ numb5_results &lt;- numb5_df %&gt;%
   rename(&quot;Welfare LCS&quot; = &quot;welfare_lcs&quot;) %&gt;% 
   rename(&quot;Marginal External Cost&quot; = &quot;MEC&quot;)
   
-kbl(numb5_results, caption = &quot;Table 1: Results for different estimates of the social cost of carbon. All values, aside from percents and gallons, are in dollars.&quot;) %&gt;% 
+kbl(numb5_results, caption = &quot;Table 1: Results for different estimates of the social cost of carbon. All values are in dollars.&quot;) %&gt;% 
    kable_styling(latex_options = c(&quot;striped&quot;, &quot;hold_position&quot;),
                 full_width = F)</code></pre>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
-Table 1: Results for different estimates of the social cost of carbon. All values, aside from percents and gallons, are in dollars.
+Table 1: Results for different estimates of the social cost of carbon. All values are in dollars.
 </caption>
 <thead>
 <tr>
@@ -344,70 +344,19 @@ Producer Surplus
 </tr>
 <tr>
 <td style="text-align:right;">
-60
+75
 </td>
 <td style="text-align:right;">
-0.53340
+0.66675
 </td>
 <td style="text-align:right;">
-3195629
+3210204
 </td>
 <td style="text-align:right;">
-290801.89
+213125.77
 </td>
 <td style="text-align:right;">
-859187.4
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-70
-</td>
-<td style="text-align:right;">
-0.62230
-</td>
-<td style="text-align:right;">
-3205418
-</td>
-<td style="text-align:right;">
-238879.27
-</td>
-<td style="text-align:right;">
-848542.7
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-80
-</td>
-<td style="text-align:right;">
-0.71120
-</td>
-<td style="text-align:right;">
-3214916
-</td>
-<td style="text-align:right;">
-187510.86
-</td>
-<td style="text-align:right;">
-837964.4
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-90
-</td>
-<td style="text-align:right;">
-0.80010
-</td>
-<td style="text-align:right;">
-3224122
-</td>
-<td style="text-align:right;">
-136696.93
-</td>
-<td style="text-align:right;">
-827452.5
+843245.3
 </td>
 </tr>
 <tr>
@@ -429,70 +378,19 @@ Producer Surplus
 </tr>
 <tr>
 <td style="text-align:right;">
-110
+125
 </td>
 <td style="text-align:right;">
-0.97790
+1.11125
 </td>
 <td style="text-align:right;">
-3241658
+3254042
 </td>
 <td style="text-align:right;">
-36733.55
+-36781.48
 </td>
 <td style="text-align:right;">
-806627.6
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-120
-</td>
-<td style="text-align:right;">
-1.06680
-</td>
-<td style="text-align:right;">
-3249987
-</td>
-<td style="text-align:right;">
--12415.35
-</td>
-<td style="text-align:right;">
-796314.7
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-130
-</td>
-<td style="text-align:right;">
-1.15570
-</td>
-<td style="text-align:right;">
-3258023
-</td>
-<td style="text-align:right;">
--61008.69
-</td>
-<td style="text-align:right;">
-786068.2
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-140
-</td>
-<td style="text-align:right;">
-1.24460
-</td>
-<td style="text-align:right;">
-3265766
-</td>
-<td style="text-align:right;">
--109046.16
-</td>
-<td style="text-align:right;">
-775888.0
+791183.1
 </td>
 </tr>
 <tr>
